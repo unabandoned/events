@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
-      # OIDC trusted publishing and `npm trust` require npm >= 11.5.1
+      # OIDC trusted publishing requires npm >= 11.5.1
       - run: npm install -g npm@latest
       - run: npm install
 
@@ -26,32 +26,29 @@ jobs:
         if: vars.OIDC_ENABLED == 'true'
         run: npm publish --provenance --access public
 
-      # ---- Bootstrap (flag not set): try OIDC first, fall back to token ----
-      # If trusted publishing already works, this succeeds and we just set the
-      # flag. Otherwise we publish with NPM_SECRET, configure GitHub Actions as
-      # a trusted publisher via `npm trust`, and flip OIDC_ENABLED so every
-      # later release skips the token path entirely.
-      - name: Try OIDC publish (bootstrap)
+      # ---- Bootstrap (flag not set): try OIDC, fall back to token ----
+      # Trusted publishing must be configured by a human via `npm trust`
+      # (2FA-gated; CI tokens are rejected), so CI never runs it. Instead we
+      # try OIDC on every release until it works, then flip the flag.
+      - name: Try OIDC publish
         id: oidc_try
         if: vars.OIDC_ENABLED != 'true'
         continue-on-error: true
         run: npm publish --provenance --access public
 
-      - name: Bootstrap with token, then enable trusted publishing
+      - name: Bootstrap publish with token (OIDC not enabled yet)
         if: vars.OIDC_ENABLED != 'true' && steps.oidc_try.outcome == 'failure'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET }}
-          GH_TOKEN: ${{ secrets.PAT }}
         run: |
-          set -euo pipefail
-          echo "OIDC not available yet; publishing with NPM_SECRET to bootstrap."
+          set -eu
+          echo "OIDC not available yet; publishing with NPM_SECRET."
+          echo "To enable OIDC, run this once locally with a 2FA-enabled account:"
+          echo "  npm trust github --repo $GITHUB_REPOSITORY --file publish.yml --allow-publish"
+          echo "After that, the next release publishes via OIDC and sets OIDC_ENABLED automatically."
           npm publish --provenance --access public
-          echo "Configuring GitHub Actions as a trusted publisher for this repo..."
-          npm trust github --repo "$GITHUB_REPOSITORY" --file publish.yml --allow-publish -y
-          echo "Recording OIDC_ENABLED=true so future releases publish tokenless."
-          gh variable set OIDC_ENABLED --repo "$GITHUB_REPOSITORY" --body true
 
-      - name: Record OIDC flag (OIDC already worked)
+      - name: Record OIDC flag (OIDC worked -> trusted publishing is live)
         if: vars.OIDC_ENABLED != 'true' && steps.oidc_try.outcome == 'success'
         env:
           GH_TOKEN: ${{ secrets.PAT }}
