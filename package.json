@@ -26,13 +26,13 @@
     "provenance": true
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-conventional": "^19.6.0",
-    "functions-have-names": "^1.2.1",
-    "has": "^1.0.3",
-    "has-symbols": "^1.0.1",
-    "isarray": "^2.0.5",
-    "tape": "^5.0.0"
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "functions-have-names": "1.2.3",
+    "has": "1.0.4",
+    "has-symbols": "1.1.0",
+    "isarray": "2.0.5",
+    "tape": "5.10.2"
   },
   "scripts": {
     "test": "node tests/index.js",
