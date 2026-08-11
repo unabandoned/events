@@ -1,5 +1,5 @@
 {
-  "name": "events",
+  "name": "@unabandoned/events",
   "version": "3.3.0",
   "description": "Node's event emitter for all engines.",
   "keywords": [
@@ -11,18 +11,23 @@
   "author": "Irakli Gozalishvili <rfobic@gmail.com> (http://jeditoolkit.com)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/browserify/events.git",
-    "web": "https://github.com/browserify/events"
+    "url": "git+https://github.com/unabandoned/events.git"
   },
   "bugs": {
-    "url": "http://github.com/browserify/events/issues/"
+    "url": "https://github.com/unabandoned/events/issues"
   },
+  "homepage": "https://github.com/unabandoned/events",
   "main": "./events.js",
   "engines": {
     "node": ">=0.8.x"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "devDependencies": {
-    "airtap": "^1.0.0",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "functions-have-names": "^1.2.1",
     "has": "^1.0.3",
     "has-symbols": "^1.0.1",
@@ -31,7 +36,7 @@
   },
   "scripts": {
     "test": "node tests/index.js",
-    "test:browsers": "airtap -- tests/index.js"
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "license": "MIT"
 }
