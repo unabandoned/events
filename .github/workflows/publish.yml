@@ -17,8 +17,42 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
-      - run: npm install -g npm@11
+      # OIDC trusted publishing and `npm trust` require npm >= 11.5.1
+      - run: npm install -g npm@latest
       - run: npm install
-      - run: npm publish --provenance --access public
+
+      # ---- Steady state: OIDC configured (flag set) -> tokenless publish ----
+      - name: Publish via OIDC
+        if: vars.OIDC_ENABLED == 'true'
+        run: npm publish --provenance --access public
+
+      # ---- Bootstrap (flag not set): try OIDC first, fall back to token ----
+      # If trusted publishing already works, this succeeds and we just set the
+      # flag. Otherwise we publish with NPM_SECRET, configure GitHub Actions as
+      # a trusted publisher via `npm trust`, and flip OIDC_ENABLED so every
+      # later release skips the token path entirely.
+      - name: Try OIDC publish (bootstrap)
+        id: oidc_try
+        if: vars.OIDC_ENABLED != 'true'
+        continue-on-error: true
+        run: npm publish --provenance --access public
+
+      - name: Bootstrap with token, then enable trusted publishing
+        if: vars.OIDC_ENABLED != 'true' && steps.oidc_try.outcome == 'failure'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET }}
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          set -euo pipefail
+          echo "OIDC not available yet; publishing with NPM_SECRET to bootstrap."
+          npm publish --provenance --access public
+          echo "Configuring GitHub Actions as a trusted publisher for this repo..."
+          npm trust github --repo "$GITHUB_REPOSITORY" --file publish.yml --allow-publish -y
+          echo "Recording OIDC_ENABLED=true so future releases publish tokenless."
+          gh variable set OIDC_ENABLED --repo "$GITHUB_REPOSITORY" --body true
+
+      - name: Record OIDC flag (OIDC already worked)
+        if: vars.OIDC_ENABLED != 'true' && steps.oidc_try.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: gh variable set OIDC_ENABLED --repo "$GITHUB_REPOSITORY" --body true
