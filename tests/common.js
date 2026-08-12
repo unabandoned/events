@@ -19,17 +19,30 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var test = require('tape');
 var assert = require('assert');
 
 var noop = function() {};
 
 var mustCallChecks = [];
 
+// Callbacks to run once the whole suite has finished. The node:test harness in
+// index.js drains these from an `after()` hook, replacing tape's onFinish.
+var onFinishCallbacks = [];
+
+exports.onFinish = function(cb) {
+  onFinishCallbacks.push(cb);
+};
+
+exports.drainOnFinish = function() {
+  while (onFinishCallbacks.length) {
+    onFinishCallbacks.shift()();
+  }
+};
+
 function runCallChecks(exitCode) {
   if (exitCode !== 0) return;
 
-  var failed = filter(mustCallChecks, function(context) {
+  var failed = mustCallChecks.filter(function(context) {
     if ('minimum' in context) {
       context.messageSegment = 'at least ' + context.minimum;
       return context.actual < context.minimum;
@@ -78,7 +91,7 @@ function _mustCallInner(fn, criteria, field) {
   context[field] = criteria;
 
   // add the exit listener only once to avoid listener leak warnings
-  if (mustCallChecks.length === 0) test.onFinish(function() { runCallChecks(0); });
+  if (mustCallChecks.length === 0) exports.onFinish(function() { runCallChecks(0); });
 
   mustCallChecks.push(context);
 
@@ -93,12 +106,3 @@ exports.mustNotCall = function(msg) {
     assert.fail(msg || 'function should not have been called');
   };
 };
-
-function filter(arr, fn) {
-  if (arr.filter) return arr.filter(fn);
-  var filtered = [];
-  for (var i = 0; i < arr.length; i++) {
-    if (fn(arr[i], i, arr)) filtered.push(arr[i]);
-  }
-  return filtered
-}

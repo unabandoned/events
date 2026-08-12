@@ -10,7 +10,3 @@ for (var i=0 ; i<fns.length ; ++i) {
         console[fn] = function() {};
     }
 }
-
-if (!Array.isArray) {
-    Array.isArray = require('isarray');
-}

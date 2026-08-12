@@ -20,7 +20,6 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var common = require('./common');
-var test = require('tape');
 var assert = require('assert');
 var EventEmitter = require('../').EventEmitter;
 var util = require('util');
@@ -46,7 +45,7 @@ assert.throws(function() {
   new ErrorEE();
 }, /blerg/);
 
-test.onFinish(function() {
+common.onFinish(function() {
   assert.ok(!(myee._events instanceof Object));
   assert.strictEqual(Object.keys(myee._events).length, 0);
 });
