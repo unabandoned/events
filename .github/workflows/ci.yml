@@ -5,6 +5,8 @@ on:
   pull_request:
 jobs:
   ci:
+    permissions:
+      contents: read
     uses: unabandoned/.github/.github/workflows/reusable-ci.yml@ab6594761eb1a6aee92bbb84c1ea333c02346e3a # main
     with:
       node-versions: '[20, 22, 24]'

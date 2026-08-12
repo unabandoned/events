@@ -4,5 +4,8 @@ on:
     types: [closed]
 jobs:
   security-release:
+    permissions:
+      contents: write
+      pull-requests: write
     uses: unabandoned/.github/.github/workflows/reusable-release-security.yml@ab6594761eb1a6aee92bbb84c1ea333c02346e3a # main
     secrets: inherit
