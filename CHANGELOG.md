@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.3.2](https://github.com/unabandoned/events/compare/events-v3.3.1...events-v3.3.2) (2026-08-12)
+
+
+### Dependencies & maintenance
+
+* **deps:** pin dependencies ([92213d7](https://github.com/unabandoned/events/commit/92213d7244621d08a5e349ec039ad03fe46a380c))
+* **deps:** pin dependencies ([e9120f5](https://github.com/unabandoned/events/commit/e9120f50435acaaee3933414cae2be00d85b0a1b))
+* **deps:** update actions/checkout action to v4.4.0 ([#4](https://github.com/unabandoned/events/issues/4)) ([89c4b66](https://github.com/unabandoned/events/commit/89c4b667d70aab46d7ec22893d05277151209e85))
+* **deps:** update actions/checkout action to v7 ([18a7b06](https://github.com/unabandoned/events/commit/18a7b0630f54c61b080c411a84104773b45083a1))
+* **deps:** update actions/checkout action to v7 ([a98f43e](https://github.com/unabandoned/events/commit/a98f43ea0263ed7ca1f2ee3275eb8a70299b6746))
+* **deps:** update actions/setup-node action to v4.4.0 ([#7](https://github.com/unabandoned/events/issues/7)) ([a756f41](https://github.com/unabandoned/events/commit/a756f41c146892bc6721e507e948b71ef2cf09f6))
+* **deps:** update actions/setup-node action to v7 ([#12](https://github.com/unabandoned/events/issues/12)) ([120897c](https://github.com/unabandoned/events/commit/120897cf09cb825b1e8229fc365e580acf1344ca))
+* **deps:** update commitlint monorepo to v21 ([5fbe4df](https://github.com/unabandoned/events/commit/5fbe4df99115ae9d2c3eefce7d73fa8993062d8a))
+* **deps:** update commitlint monorepo to v21 ([b67c643](https://github.com/unabandoned/events/commit/b67c643f931c0cfa5a3afb833d6743c5886881b7))
+* **deps:** update dependency node to v24 ([88ff1ba](https://github.com/unabandoned/events/commit/88ff1ba82e57a2d2e725ad7129ed69825789262e))
+* **deps:** update dependency node to v24 ([56cd2d2](https://github.com/unabandoned/events/commit/56cd2d2c5e89d0f677a23d492f30ccac7f284d4f))
+* **deps:** update googleapis/release-please-action action to v4.4.1 ([dc4036d](https://github.com/unabandoned/events/commit/dc4036df9d35d8ada379caab219ea96591a4b985))
+* **deps:** update googleapis/release-please-action action to v4.4.1 ([a895f3e](https://github.com/unabandoned/events/commit/a895f3e9130c3eedab72a95fc6f0e59a220bdf0f))
+* **deps:** update googleapis/release-please-action action to v5 ([c411d45](https://github.com/unabandoned/events/commit/c411d4513c04c541effc829eef31aef96f7725f9))
+* **deps:** update googleapis/release-please-action action to v5 ([f54fed4](https://github.com/unabandoned/events/commit/f54fed490d73ddbefa233f8fd36d029ac3a11f8c))
+* fold dependency notes below consumer changes in release notes ([#9](https://github.com/unabandoned/events/issues/9)) ([6bc72da](https://github.com/unabandoned/events/commit/6bc72daaffd205518edd81d5e6ebe4e02117d73e))
+* migrate event tests to zero-dep node:test harness ([#16](https://github.com/unabandoned/events/issues/16)) ([0584a34](https://github.com/unabandoned/events/commit/0584a343b98758e00681f82c27eceaee9a3c5a78))
+
 ## [3.3.1](https://github.com/unabandoned/events/compare/events-v3.3.0...events-v3.3.1) (2026-08-11)
 
 
