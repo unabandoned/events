@@ -1,29 +1,9 @@
 name: release-cut
-
-# Monthly release: on the 1st of each month, merge whatever release-please
-# has accumulated. Routine dependency bumps (auto-merged nightly by Renovate)
-# ship here; security fixes ship earlier via release-security.yml.
 on:
   schedule:
     - cron: '0 6 1 * *'
   workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   cut:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Merge the pending release-please PR
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --search 'label:"autorelease: pending" state:open' --json number --jq '.[0].number // empty')
-          if [ -n "$pr" ]; then
-            echo "Cutting monthly release: merging release PR #$pr"
-            gh pr merge "$pr" --repo "$GITHUB_REPOSITORY" --squash --admin
-          else
-            echo "No pending release PR; nothing to cut this month."
-          fi
+    uses: unabandoned/.github/.github/workflows/reusable-release-cut.yml@main
+    secrets: inherit
