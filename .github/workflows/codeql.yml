@@ -7,4 +7,4 @@ on:
     - cron: '0 6 * * 1'
 jobs:
   codeql:
-    uses: unabandoned/.github/.github/workflows/reusable-codeql.yml@main
+    uses: unabandoned/.github/.github/workflows/reusable-codeql.yml@ab6594761eb1a6aee92bbb84c1ea333c02346e3a # main

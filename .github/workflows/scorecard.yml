@@ -7,4 +7,4 @@ on:
     branches: [main]
 jobs:
   scorecard:
-    uses: unabandoned/.github/.github/workflows/reusable-scorecard.yml@main
+    uses: unabandoned/.github/.github/workflows/reusable-scorecard.yml@ab6594761eb1a6aee92bbb84c1ea333c02346e3a # main
