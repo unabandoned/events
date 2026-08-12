@@ -5,5 +5,5 @@ on:
   workflow_dispatch:
 jobs:
   cut:
-    uses: unabandoned/.github/.github/workflows/reusable-release-cut.yml@main
+    uses: unabandoned/.github/.github/workflows/reusable-release-cut.yml@ab6594761eb1a6aee92bbb84c1ea333c02346e3a # main
     secrets: inherit
