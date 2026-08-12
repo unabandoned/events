@@ -1,64 +1,71 @@
-var test = require('tape');
-var functionsHaveNames = require('functions-have-names');
-var hasSymbols = require('has-symbols');
+var test = require('node:test');
+var assert = require('node:assert');
 
 require('./legacy-compat');
 var common = require('./common');
 
-// we do this to easily wrap each file in a mocha test
-// and also have browserify be able to statically analyze this file
-var orig_require = require;
-var require = function(file) {
-    test(file, function(t) {
-        // Store the tape object so tests can access it.
-        t.on('end', function () { delete common.test; });
-        common.test = t;
+// The Node core event tests were written against tape's assertion object,
+// which each test file reaches through `common.test`. Rather than rewrite
+// every assertion, expose a tiny tape-compatible adapter backed by
+// node:assert so the test bodies run unchanged under node:test.
+var currentEndCallbacks = [];
 
-        try {
-          var exp = orig_require(file);
-          if (exp && exp.then) {
-            exp.then(function () { t.end(); }, t.fail);
-            return;
-          }
-        } catch (err) {
-          t.fail(err);
-        }
-        t.end();
-    });
+common.test = {
+  strictEqual: function(actual, expected, msg) { assert.strictEqual(actual, expected, msg); },
+  equal: function(actual, expected, msg) { assert.strictEqual(actual, expected, msg); },
+  ok: function(value, msg) { assert.ok(value, msg); },
+  fail: function(msg) { assert.fail(msg || 'fail'); },
+  throws: function(fn, expected, msg) { assert.throws(fn, expected, msg); },
+  doesNotThrow: function(fn, expected, msg) { assert.doesNotThrow(fn, expected, msg); },
+  comment: function(msg) { console.log('# ' + msg); },
+  end: function() {},
+  // tape exposes `t.on('end', cb)` for per-test teardown; route it to a
+  // per-file list the runner drains after each file's body completes.
+  on: function(event, cb) { if (event === 'end') currentEndCallbacks.push(cb); }
 };
 
-require('./add-listeners.js');
-require('./check-listener-leaks.js');
-require('./errors.js');
-require('./events-list.js');
-if (typeof Promise === 'function') {
-  require('./events-once.js');
-} else {
-  // Promise support is not available.
-  test('./events-once.js', { skip: true }, function () {});
+// Wrap each test file in a node:test subtest. Top-level tests run
+// sequentially, so a shared `currentEndCallbacks` is safe.
+function run(file) {
+  test(file, async function() {
+    currentEndCallbacks = [];
+    var exp = require(file);
+    if (exp && typeof exp.then === 'function') {
+      await exp;
+    }
+    var endCallbacks = currentEndCallbacks;
+    for (var i = 0; i < endCallbacks.length; i++) {
+      endCallbacks[i]();
+    }
+  });
 }
-require('./listener-count.js');
-require('./listeners-side-effects.js');
-require('./listeners.js');
-require('./max-listeners.js');
-if (functionsHaveNames()) {
-  require('./method-names.js');
-} else {
-  // Function.name is not supported in IE
-  test('./method-names.js', { skip: true }, function () {});
-}
-require('./modify-in-emit.js');
-require('./num-args.js');
-require('./once.js');
-require('./prepend.js');
-require('./set-max-listeners-side-effects.js');
-require('./special-event-names.js');
-require('./subclass.js');
-if (hasSymbols()) {
-  require('./symbols.js');
-} else {
-  // Symbol is not available.
-  test('./symbols.js', { skip: true }, function () {});
-}
-require('./remove-all-listeners.js');
-require('./remove-listeners.js');
+
+run('./add-listeners.js');
+run('./check-listener-leaks.js');
+run('./errors.js');
+run('./events-list.js');
+run('./events-once.js');
+run('./listener-count.js');
+run('./listeners-side-effects.js');
+run('./listeners.js');
+run('./max-listeners.js');
+run('./method-names.js');
+run('./modify-in-emit.js');
+run('./num-args.js');
+run('./once.js');
+run('./prepend.js');
+run('./set-max-listeners-side-effects.js');
+run('./special-event-names.js');
+run('./subclass.js');
+run('./symbols.js');
+run('./remove-all-listeners.js');
+run('./remove-listeners.js');
+
+// tape's onFinish ran the deferred common.mustCall checks (and other teardown
+// assertions) once the whole run completed. Run them from a final subtest
+// rather than an after() hook: top-level tests execute sequentially, so this
+// runs last, and unlike an after() hook an assertion failure here actually
+// fails the run and sets a non-zero exit code.
+test('deferred checks (mustCall)', function() {
+  common.drainOnFinish();
+});

@@ -3,8 +3,11 @@
 var common = require('./common');
 var EventEmitter = require('../').EventEmitter;
 var once = require('../').once;
-var has = require('has');
 var assert = require('assert');
+
+function has(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
 
 function Event(type) {
   this.type = type;

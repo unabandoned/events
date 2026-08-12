@@ -22,11 +22,10 @@
 var common = require('./common');
 var assert = require('assert');
 var events = require('../');
-var test = require('tape');
 
 function expect(expected) {
   var actual = [];
-  test.onFinish(function() {
+  common.onFinish(function() {
     var sortedActual = actual.sort();
     var sortedExpected = expected.sort();
     assert.strictEqual(sortedActual.length, sortedExpected.length);
