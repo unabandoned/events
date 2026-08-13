@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.3.3](https://github.com/unabandoned/events/compare/events-v3.3.2...events-v3.3.3) (2026-08-13)
+
+
+### Dependencies & maintenance
+
+* add Renovate config validation workflow ([#26](https://github.com/unabandoned/events/issues/26)) ([5db6177](https://github.com/unabandoned/events/commit/5db61772bd09d2d196e732fe1bdf6e4d5e5bdcec))
+* **deps:** pin unabandoned/.github action to 0a154f2 ([#21](https://github.com/unabandoned/events/issues/21)) ([447b586](https://github.com/unabandoned/events/commit/447b5868da7c70ee66b46f055192a04e032edb6e))
+* **deps:** pin unabandoned/.github action to ab65947 ([#18](https://github.com/unabandoned/events/issues/18)) ([76e5d2d](https://github.com/unabandoned/events/commit/76e5d2d243052fe33ec959be2167da73576581a5))
+* **deps:** update unabandoned/.github digest to 0a154f2 ([#19](https://github.com/unabandoned/events/issues/19)) ([50cb5b5](https://github.com/unabandoned/events/commit/50cb5b59cfc9f00d17b3db8f5aea990f41630a61))
+* **deps:** update unabandoned/.github digest to 6be3bc5 ([#24](https://github.com/unabandoned/events/issues/24)) ([6fee380](https://github.com/unabandoned/events/commit/6fee38063b4b06272493c24ff53b8530593f759b))
+* drop Tidelift from the security policy and funding config ([#25](https://github.com/unabandoned/events/issues/25)) ([c921e88](https://github.com/unabandoned/events/commit/c921e885f73f6a7c805a1c643a7b4393c9f8c9b7))
+* grant CodeQL/Scorecard callers the token scopes they need ([5eb6303](https://github.com/unabandoned/events/commit/5eb6303a0d35a5c58542050814a3385c806f77a6))
+* pin explicit token permissions on ci and release callers ([05e2c20](https://github.com/unabandoned/events/commit/05e2c20c8f07a3f2763ad40e68a79f5b9f2dc23e))
+* replace workflows with thin callers to org reusable workflows ([64d8622](https://github.com/unabandoned/events/commit/64d862280757bb90f82b79a8dd3acb5d5a7871da))
+
 ## [3.3.2](https://github.com/unabandoned/events/compare/events-v3.3.1...events-v3.3.2) (2026-08-12)
 
 
