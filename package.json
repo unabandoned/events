@@ -1,6 +1,6 @@
 {
   "name": "@unabandoned/events",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Node's event emitter for all engines.",
   "keywords": [
     "events",
