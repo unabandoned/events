@@ -1,0 +1,24 @@
+schema: 1
+
+package: "@unabandoned/events"
+
+upstream:
+  repo: browserify/events
+  reason: "unmaintained upstream — the package sits idle while its dev-dependency tree ages"
+
+summary: >-
+  Node.js's EventEmitter implemented for the browser and other environments that
+  don't ship Node's built-in `events` module.
+
+why-forked: >-
+  A transitive dependency of browserify-style bundling that went unmaintained
+  while its dev tree aged; forked so Renovate keeps that tree current for the
+  consumers that pull it in transitively.
+
+status: active
+
+used-by:
+  - consumer: "@unabandoned/browserify"
+    purpose: "EventEmitter polyfill bundled into browser builds in place of Node's built-in."
+
+tags: [browser, events, shim, node-core-polyfill]
