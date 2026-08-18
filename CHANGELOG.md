@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.3.4](https://github.com/unabandoned/events/compare/events-v3.3.3...events-v3.3.4) (2026-08-18)
+
+
+### Dependencies & maintenance
+
+* add .unabandoned.yml dashboard metadata ([#28](https://github.com/unabandoned/events/issues/28)) ([98c709f](https://github.com/unabandoned/events/commit/98c709f1aa9e435236c33c6d623d10162a820b1b))
+* **deps:** update commitlint monorepo to v21.2.2 ([#31](https://github.com/unabandoned/events/issues/31)) ([b439dd3](https://github.com/unabandoned/events/commit/b439dd353a119c09b6f91bd523376f617e3fd952))
+* **deps:** update unabandoned/.github action to v1.0.1 ([#32](https://github.com/unabandoned/events/issues/32)) ([eee154d](https://github.com/unabandoned/events/commit/eee154d7d213c68572c31fc1d667d3f4bfaa59a1))
+* **deps:** update unabandoned/.github digest to 88ce617 ([#27](https://github.com/unabandoned/events/issues/27)) ([d6c27e7](https://github.com/unabandoned/events/commit/d6c27e78b2b08344465c6697bc3f09b10e9aa733))
+* pin reusable workflows to the @unabandoned/.github v1.0.0 release ([#30](https://github.com/unabandoned/events/issues/30)) ([33f3ba4](https://github.com/unabandoned/events/commit/33f3ba4869d17e4fbb060e590cf3707f6a0327ed))
+
 ## [3.3.3](https://github.com/unabandoned/events/compare/events-v3.3.2...events-v3.3.3) (2026-08-13)
 
 
