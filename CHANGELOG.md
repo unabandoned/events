@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.5](https://github.com/unabandoned/events/compare/events-v3.3.4...events-v3.3.5) (2026-08-28)
+
+
+### Dependencies & maintenance
+
+* **deps:** update unabandoned/.github action to v1.0.3 ([#34](https://github.com/unabandoned/events/issues/34)) ([5233bf0](https://github.com/unabandoned/events/commit/5233bf0cb7c24b9b2b5b9ebff8b1cbf2781dba09))
+
 ## [3.3.4](https://github.com/unabandoned/events/compare/events-v3.3.3...events-v3.3.4) (2026-08-23)
 
 
