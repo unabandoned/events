@@ -28,31 +28,31 @@
         },
         {
           "type": "build",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         },
         {
           "type": "chore",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         },
         {
           "type": "ci",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         },
         {
           "type": "refactor",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         },
         {
           "type": "docs",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         },
         {
           "type": "test",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         },
         {
           "type": "style",
-          "section": "Dependencies & maintenance"
+          "hidden": true
         }
       ]
     }
