@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.7](https://github.com/unabandoned/events/compare/events-v3.3.6...events-v3.3.7) (2026-09-23)
+
+
+### Dependencies & maintenance
+
+* **deps:** update commitlint monorepo to v21.2.3 ([#40](https://github.com/unabandoned/events/issues/40)) ([12ba645](https://github.com/unabandoned/events/commit/12ba645cc266cd41b80ca248faa304e7db09d5d8))
+
 ## [3.3.6](https://github.com/unabandoned/events/compare/events-v3.3.5...events-v3.3.6) (2026-09-22)
 
 
