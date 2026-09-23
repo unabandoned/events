@@ -28,7 +28,7 @@
         },
         {
           "type": "build",
-          "hidden": true
+          "section": "Dependencies & maintenance"
         },
         {
           "type": "chore",
@@ -40,11 +40,11 @@
         },
         {
           "type": "refactor",
-          "hidden": true
+          "section": "Dependencies & maintenance"
         },
         {
           "type": "docs",
-          "hidden": true
+          "section": "Dependencies & maintenance"
         },
         {
           "type": "test",
