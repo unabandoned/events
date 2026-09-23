@@ -1,6 +1,11 @@
 {
   "name": "@unabandoned/events",
   "version": "3.3.6",
+  "files": [
+    "CHANGELOG.md",
+    "History.md",
+    "events.js"
+  ],
   "description": "Node's event emitter for all engines.",
   "keywords": [
     "events",
